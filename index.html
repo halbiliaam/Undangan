@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Halbil IAAM 9 - Halal Bihalal & Pengajian Akbar</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#0F0F0F',
+              dark: '#1A1A1A',
+              orange: '#F57C00',
+              gold: '#FFC107',
+            }
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'serif'],
+            arabic: ['Amiri', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Playfair Display, Amiri, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom Styles & Animations -->
+  <style>
+    body {
+      background-color: #0F0F0F;
+      color: #F3F4F6;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0F0F0F;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #F57C00;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #FFC107;
+    }
+
+    /* Glowing Effects */
+    .glow-orange {
+      box-shadow: 0 0 25px rgba(245, 124, 0, 0.4);
+    }
+    .glow-gold {
+      box-shadow: 0 0 35px rgba(255, 193, 7, 0.5);
+    }
+    .text-glow {
+      text-shadow: 0 0 12px rgba(255, 193, 7, 0.6);
+    }
+
+    /* Glassmorphism Cards */
+    .glass-card {
+      background: rgba(26, 26, 26, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(245, 124, 0, 0.2);
+    }
+    .glass-card:hover {
+      border-color: rgba(255, 193, 7, 0.5);
+    }
+
+    /* Floating Lantern Animation */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(2deg); }
+    }
+    .animate-float {
+      animation: floatSlow 5s ease-in-out infinite;
+    }
+
+    /* Pulsing Light Beam */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.08); }
+    }
+    .animate-pulse-glow {
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen">
+
+  <div id="loadingScreen" class="fixed inset-0 z-50 bg-[#0F0F0F] flex flex-col items-center justify-center transition-opacity duration-700 p-6">
+    <div class="relative flex items-center justify-center mb-6">
+      <div class="w-28 h-28 rounded-full bg-amber-500/20 animate-ping absolute"></div>
+      <div class="relative z-10 w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center shadow-[0_0_35px_rgba(245,124,0,0.7)]">
+        <i class="fa-solid fa-lightbulb text-3xl text-white animate-pulse"></i>
+      </div>
+    </div>
+    <h2 class="text-2xl font-bold tracking-widest text-amber-400 font-serif mb-2 text-center">HALBIL IAAM 9</h2>
+    <p class="text-xs text-gray-400 tracking-widest uppercase mb-6 text-center">Memuat Undangan Digital...</p>
+    <div class="w-48 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
+      <div class="h-full bg-gradient-to-r from-amber-500 to-orange-500 animate-pulse w-3/4 rounded-full"></div>
+    </div>
+  </div>
+
+  <canvas id="lanternCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <!-- HTML5 Audio Sound Engine -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-islamic-calm-112191.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+    <!-- Audio Control Toggle -->
+    <button id="audioBtn" onclick="toggleAudio()" class="hidden w-12 h-12 rounded-full bg-amber-500 text-black flex items-center justify-center shadow-[0_0_20px_rgba(245,124,0,0.6)] hover:scale-110 active:scale-95 transition-all animate-bounce" title="Putar / Hentikan Musik">
+      <i id="audioIcon" class="fa-solid fa-volume-xmark text-lg"></i>
+    </button>
+
+    <!-- CMS Admin Toggle -->
+    <button onclick="openAdminModal()" class="w-12 h-12 rounded-full bg-neutral-900/90 border border-amber-500/40 text-amber-400 hover:text-white flex items-center justify-center shadow-lg hover:border-amber-400 backdrop-blur-md transition-all hover:rotate-45" title="Buka Admin CMS">
+      <i class="fa-solid fa-sliders text-lg"></i>
+    </button>
+
+    <!-- Customizer Drawer Toggle -->
+    <button onclick="openCustomizerDrawer()" class="w-12 h-12 rounded-full bg-neutral-900/90 border border-amber-500/40 text-amber-400 hover:text-white flex items-center justify-center shadow-lg hover:border-amber-400 backdrop-blur-md transition-all hover:scale-105" title="Kustomisasi Tampilan">
+      <i class="fa-solid fa-palette text-lg"></i>
+    </button>
+  </div>
+
+  <section id="sec-hero" class="relative min-h-screen flex flex-col items-center justify-between p-6 text-center z-10 border-b border-amber-500/10">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-900/20 via-neutral-950 to-neutral-950 -z-10"></div>
+
+    <!-- Editable Top Logos -->
+    <div class="pt-8 w-full max-w-4xl flex items-center justify-center gap-4 sm:gap-10">
+      <div class="flex flex-col items-center">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl glass-card p-2 flex items-center justify-center shadow-lg">
+          <img id="logo-iaam" src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=150&auto=format&fit=crop&q=80" alt="IAAM Logo" class="max-h-full max-w-full object-contain rounded-lg" onerror="this.src='https://placehold.co/150x150/1A1A1A/F57C00?text=IAAM'" />
+        </div>
+        <span class="text-[10px] text-amber-300/80 uppercase tracking-widest mt-2 font-medium">IAAM Pusat</span>
+      </div>
+
+      <div class="flex flex-col items-center">
+        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-b from-amber-500/30 to-orange-600/20 border border-amber-400 p-2 flex items-center justify-center shadow-[0_0_25px_rgba(245,124,0,0.4)] animate-float">
+          <img id="logo-halbil" src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=150&auto=format&fit=crop&q=80" alt="Halbil Logo" class="max-h-full max-w-full object-contain rounded-lg" onerror="this.src='https://placehold.co/150x150/1A1A1A/FFC107?text=HALBIL+9'" />
+        </div>
+        <span class="text-[10px] text-amber-400 uppercase tracking-widest mt-2 font-bold">HALBIL IX</span>
+      </div>
+
+      <div class="flex flex-col items-center">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl glass-card p-2 flex items-center justify-center shadow-lg">
+          <img id="logo-foundation" src="https://images.unsplash.com/photo-1564769625905-50e93615e769?w=150&auto=format&fit=crop&q=80" alt="Yayasan Logo" class="max-h-full max-w-full object-contain rounded-lg" onerror="this.src='https://placehold.co/150x150/1A1A1A/F57C00?text=YAYASAN'" />
+        </div>
+        <span class="text-[10px] text-amber-300/80 uppercase tracking-widest mt-2 font-medium">Yayasan</span>
+      </div>
+    </div>
+
+    <!-- Titles & Quotes -->
+    <div class="my-auto max-w-3xl px-4 py-8">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold uppercase tracking-widest mb-6 backdrop-blur-md">
+        <i class="fa-solid fa-sparkles"></i> Undangan Resmi Digital
+      </div>
+
+      <h1 id="heroTitle" class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight font-serif bg-gradient-to-r from-amber-200 via-orange-400 to-amber-500 bg-clip-text text-transparent drop-shadow-sm mb-3">
+        HALBIL IAAM 9
+      </h1>
+
+      <h2 id="heroSubtitle" class="text-xl sm:text-3xl font-medium text-amber-100/90 font-serif mb-4">
+        Halal Bihalal & Pengajian Akbar
+      </h2>
+
+      <p id="heroOrganizer" class="text-sm sm:text-base text-gray-400 max-w-xl mx-auto mb-8 font-light leading-relaxed">
+        Ikatan Alumni Al-Falahul Makkiyah Majidiyah (IAAM)
+      </p>
+
+      <div class="p-6 rounded-2xl glass-card max-w-lg mx-auto shadow-2xl relative overflow-hidden group">
+        <div class="absolute -right-8 -top-8 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all"></div>
+        <p class="text-xs uppercase tracking-widest text-amber-400 font-semibold mb-1">Tema Acara</p>
+        <p id="heroThemeQuote" class="text-base sm:text-lg font-serif italic text-amber-100 leading-snug">
+          "Lentera yang Menyala Menciptakan Cahaya Penerang Bangsa"
+        </p>
+      </div>
+    </div>
+
+    <!-- CTA Unlock Invitation Button -->
+    <div class="pb-12 w-full max-w-md mx-auto">
+      <button id="openBtn" onclick="openInvitation()" class="w-full py-4 px-8 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-black font-bold text-base sm:text-lg tracking-wide shadow-[0_0_30px_rgba(245,124,0,0.5)] hover:shadow-[0_0_45px_rgba(245,124,0,0.8)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+        <i class="fa-solid fa-envelope-open text-xl"></i>
+        <span>Buka Undangan</span>
+        <i class="fa-solid fa-chevron-right text-sm"></i>
+      </button>
+
+      <div id="openedBadge" class="hidden flex-col items-center gap-2 text-amber-400">
+        <span class="text-xs uppercase tracking-widest">Undangan Telah Terbuka</span>
+        <div class="w-6 h-10 rounded-full border-2 border-amber-400/50 flex items-start justify-center p-1">
+          <div class="w-1.5 h-3 bg-amber-400 rounded-full animate-bounce"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="invitationContent" class="opacity-40 pointer-events-none filter blur-sm transition-all duration-700">
+
+    <!-- Guest Greeting Section -->
+    <section id="sec-guest" class="py-12 px-6 max-w-4xl mx-auto text-center relative z-10">
+      <div class="p-8 sm:p-10 rounded-3xl glass-card shadow-2xl relative overflow-hidden">
+        <div class="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto mb-4 text-amber-400">
+          <i class="fa-solid fa-user-check text-2xl"></i>
+        </div>
+        <p class="text-xs uppercase tracking-widest text-amber-400 font-semibold mb-2">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+        <h3 id="displayGuestName" class="text-2xl sm:text-4xl font-bold font-serif text-white mb-3 tracking-wide">
+          Tamu Undangan
+        </h3>
+        <p class="text-xs sm:text-sm text-gray-400 max-w-md mx-auto leading-relaxed">
+          Tanpa mengurangi rasa hormat, kami mengundang Anda untuk hadir dan bersilaturahmi dalam majelis penuh keberkahan ini.
+        </p>
+      </div>
+    </section>
+
+    <!-- Realtime Countdown Timer Section -->
+    <section id="sec-countdown" class="py-12 px-6 max-w-5xl mx-auto text-center relative z-10">
+      <div class="mb-8">
+        <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">Hitung Mundur Acara</span>
+        <h3 class="text-2xl sm:text-3xl font-serif font-bold text-white mt-1">Menuju Halbil IAAM 9</h3>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        <div class="p-5 sm:p-6 rounded-2xl glass-card shadow-xl flex flex-col items-center">
+          <span id="cd-days" class="text-3xl sm:text-5xl font-black font-serif text-transparent bg-clip-text bg-gradient-to-b from-amber-300 to-orange-500">00</span>
+          <span class="text-[11px] font-bold tracking-widest text-gray-400 mt-2 uppercase">HARI</span>
+        </div>
+        <div class="p-5 sm:p-6 rounded-2xl glass-card shadow-xl flex flex-col items-center">
+          <span id="cd-hours" class="text-3xl sm:text-5xl font-black font-serif text-transparent bg-clip-text bg-gradient-to-b from-amber-300 to-orange-500">00</span>
+          <span class="text-[11px] font-bold tracking-widest text-gray-400 mt-2 uppercase">JAM</span>
+        </div>
+        <div class="p-5 sm:p-6 rounded-2xl glass-card shadow-xl flex flex-col items-center">
+          <span id="cd-minutes" class="text-3xl sm:text-5xl font-black font-serif text-transparent bg-clip-text bg-gradient-to-b from-amber-300 to-orange-500">00</span>
+          <span class="text-[11px] font-bold tracking-widest text-gray-400 mt-2 uppercase">MENIT</span>
+        </div>
+        <div class="p-5 sm:p-6 rounded-2xl glass-card shadow-xl flex flex-col items-center">
+          <span id="cd-seconds" class="text-3xl sm:text-5xl font-black font-serif text-transparent bg-clip-text bg-gradient-to-b from-amber-300 to-orange-500">00</span>
+          <span class="text-[11px] font-bold tracking-widest text-gray-400 mt-2 uppercase">DETIK</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Date & Venue Details Section -->
+    <section id="sec-info" class="py-12 px-6 max-w-5xl mx-auto relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Date & Time Card -->
+        <div class="p-8 rounded-3xl glass-card shadow-xl flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-6">
+              <i class="fa-solid fa-calendar-days text-xl"></i>
+            </div>
+            <h4 class="text-xs uppercase tracking-widest text-amber-400 font-bold mb-1">Waktu Pelaksanaan</h4>
+            <h3 id="displayDate" class="text-2xl font-serif font-bold text-white mb-4">Sabtu, 18 April 2026</h3>
+            <div class="flex items-center gap-3 text-gray-300 text-sm">
+              <i class="fa-solid fa-clock text-amber-400"></i>
+              <span id="displayTime">08:00 WIB - Selesai</span>
+            </div>
+          </div>
+          <div class="mt-8 pt-6 border-t border-neutral-800 text-xs text-gray-400">
+            Diharapkan hadir 15 menit sebelum acara dimulai untuk registrasi alumni.
+          </div>
+        </div>
+
+        <!-- Venue Card -->
+        <div class="p-8 rounded-3xl glass-card shadow-xl flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-6">
+              <i class="fa-solid fa-location-dot text-xl"></i>
+            </div>
+            <h4 class="text-xs uppercase tracking-widest text-amber-400 font-bold mb-1">Lokasi Tempat</h4>
+            <h3 id="displayVenueName" class="text-xl font-serif font-bold text-white mb-2">Gedung Utama Pondok Pesantren Al-Falahul Makkiyah Majidiyah</h3>
+            <p id="displayVenueAddress" class="text-xs text-gray-400 leading-relaxed mb-6">Jl. KH. Ahmad Dahlan No. 45, Kecamatan Pesantren, Kota Kediri, Jawa Timur</p>
+          </div>
+
+          <a id="btnMapsDirect" href="https://maps.google.com/?q=Pondok+Pesantren+Al-Falahul+Makkiyah+Majidiyah" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 font-semibold text-sm flex items-center justify-center gap-2 transition-all">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka di Google Maps
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Theme & Philosophy Section -->
+    <section id="sec-theme" class="py-16 px-6 max-w-4xl mx-auto text-center relative z-10">
+      <div class="p-10 rounded-3xl bg-gradient-to-br from-amber-950/30 via-neutral-900 to-neutral-950 border border-amber-500/30 glass-card shadow-2xl relative overflow-hidden">
+        <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-amber-500 to-orange-500 p-0.5 mx-auto mb-6 shadow-[0_0_25px_rgba(245,124,0,0.5)]">
+          <div class="w-full h-full bg-neutral-950 rounded-full flex items-center justify-center text-amber-400">
+            <i class="fa-solid fa-sun text-3xl animate-pulse"></i>
+          </div>
+        </div>
+
+        <h3 class="text-xs uppercase tracking-widest text-amber-400 font-bold mb-4">Filosofi Undangan</h3>
+        <blockquote id="displayPhilosophy" class="text-lg sm:text-2xl font-serif italic text-amber-100 leading-relaxed max-w-2xl mx-auto mb-6">
+          "Lentera adalah simbol ilmu. Cahayanya adalah manfaat. Alumni adalah penerus perjuangan yang akan terus menerangi bangsa."
+        </blockquote>
+        <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto"></div>
+      </div>
+    </section>
+
+    <!-- Speakers / Masyayikh Section -->
+    <section id="sec-speakers" class="py-16 px-6 max-w-6xl mx-auto relative z-10">
+      <div class="text-center mb-12">
+        <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">Pengajian Akbar</span>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mt-1">Masyayikh & Penceramah Utama</h2>
+        <p class="text-xs sm:text-sm text-gray-400 mt-2 max-w-xl mx-auto">
+          Menebar cahaya ilmu dan petuah hikmah dalam membimbing langkah alumni serta masyarakat.
+        </p>
+      </div>
+
+      <div id="speakersContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Speaker 1 -->
+        <div class="p-8 rounded-3xl glass-card shadow-2xl flex flex-col sm:flex-row items-center sm:items-start gap-6 group">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80" alt="Gus Baha" class="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl object-cover border-2 border-amber-500/30 group-hover:scale-105 transition-transform shadow-lg flex-shrink-0" onerror="this.src='https://placehold.co/300x300/1A1A1A/F57C00?text=Penceramah'" />
+          <div class="text-center sm:text-left flex-grow">
+            <span class="text-[11px] font-bold text-amber-400 uppercase tracking-widest">Penceramah Utama</span>
+            <h3 class="text-xl font-serif font-bold text-white mt-1 mb-1">K.H. Ahmad Bahauddin Nursalim (Gus Baha)</h3>
+            <p class="text-xs text-amber-200/80 mb-3 font-medium">Rois Syuriah PBNU & Pengasuh LP3IA Rembang</p>
+            <p class="text-xs text-gray-400 leading-relaxed mb-4">Ulama kharismatik yang dikenal dengan kedalaman ilmu tafsir, pemikiran sejuk, dan kemampuannya menyampaikan hikmah agama dengan menyentuh jiwa.</p>
+            <span class="inline-flex items-center gap-1.5 text-[11px] text-amber-400/90 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+              <i class="fa-solid fa-bookmark text-xs"></i> @gusbaha_official
+            </span>
+          </div>
+        </div>
+
+        <!-- Speaker 2 -->
+        <div class="p-8 rounded-3xl glass-card shadow-2xl flex flex-col sm:flex-row items-center sm:items-start gap-6 group">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&auto=format&fit=crop&q=80" alt="Dr. Quraish Shihab" class="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl object-cover border-2 border-amber-500/30 group-hover:scale-105 transition-transform shadow-lg flex-shrink-0" onerror="this.src='https://placehold.co/300x300/1A1A1A/F57C00?text=Penceramah'" />
+          <div class="text-center sm:text-left flex-grow">
+            <span class="text-[11px] font-bold text-amber-400 uppercase tracking-widest">Penceramah Tamu</span>
+            <h3 class="text-xl font-serif font-bold text-white mt-1 mb-1">Dr. K.H. M. Quraish Shihab, M.A.</h3>
+            <p class="text-xs text-amber-200/80 mb-3 font-medium">Pendiri Pusat Studi Al-Qur'an (PSQ) Jakarta</p>
+            <p class="text-xs text-gray-400 leading-relaxed mb-4">Pakar tafsir terkemuka Indonesia yang senantiasa menanamkan pesan ukhuwah, kedamaian, dan pentingnya merawat peradaban Islam Nusantara.</p>
+            <span class="inline-flex items-center gap-1.5 text-[11px] text-amber-400/90 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+              <i class="fa-solid fa-bookmark text-xs"></i> @quraish.shihab
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Welcome Speeches Section -->
+    <section id="sec-speeches" class="py-16 px-6 max-w-6xl mx-auto relative z-10">
+      <div class="text-center mb-12">
+        <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">Sambutan Tokoh</span>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mt-1">Pesan & Harapan</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-3xl glass-card shadow-xl flex flex-col justify-between text-center">
+          <div>
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&auto=format&fit=crop&q=80" alt="Ketua Panitia" class="w-24 h-24 rounded-full object-cover border-2 border-amber-400 mx-auto mb-4 shadow-md" />
+            <h3 class="text-lg font-serif font-bold text-white mb-1">H. M. Ridwan, S.Pd.I</h3>
+            <p class="text-xs text-amber-400 font-semibold mb-4">Ketua Panitia Halbil IX</p>
+            <p class="text-xs text-gray-300 italic leading-relaxed mb-6">"Selamat datang seluruh alumni dari penjuru negeri. Semoga silaturahmi Halbil 9 ini merekatkan sanubari dan menyalakan lentera pengabdian."</p>
+          </div>
+          <div class="w-12 h-0.5 bg-amber-500/30 mx-auto"></div>
+        </div>
+
+        <div class="p-6 rounded-3xl glass-card shadow-xl flex flex-col justify-between text-center">
+          <div>
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&auto=format&fit=crop&q=80" alt="Ketua IAAM" class="w-24 h-24 rounded-full object-cover border-2 border-amber-400 mx-auto mb-4 shadow-md" />
+            <h3 class="text-lg font-serif font-bold text-white mb-1">Dr. H. Ahmad Zaki, M.Ag</h3>
+            <p class="text-xs text-amber-400 font-semibold mb-4">Ketua Umum PP IAAM</p>
+            <p class="text-xs text-gray-300 italic leading-relaxed mb-6">"Alumni Al-Falahul Makkiyah Majidiyah adalah benteng moral dan ilmu. Mari perkuat sinergi alumni untuk menjadi terang penerang bangsa."</p>
+          </div>
+          <div class="w-12 h-0.5 bg-amber-500/30 mx-auto"></div>
+        </div>
+
+        <div class="p-6 rounded-3xl glass-card shadow-xl flex flex-col justify-between text-center">
+          <div>
+            <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=300&auto=format&fit=crop&q=80" alt="Pengasuh" class="w-24 h-24 rounded-full object-cover border-2 border-amber-400 mx-auto mb-4 shadow-md" />
+            <h3 class="text-lg font-serif font-bold text-white mb-1">K.H. M. Makki Majid</h3>
+            <p class="text-xs text-amber-400 font-semibold mb-4">Pengasuh Yayasan</p>
+            <p class="text-xs text-gray-300 italic leading-relaxed mb-6">"Restu dan doa senantiasa mengalir untuk anak-anakku alumni. Jadilah lentera yang tak pernah padam di mana pun kalian berpijak."</p>
+          </div>
+          <div class="w-12 h-0.5 bg-amber-500/30 mx-auto"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Event Timeline Section -->
+    <section id="sec-timeline" class="py-16 px-6 max-w-4xl mx-auto relative z-10">
+      <div class="text-center mb-12">
+        <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">Susunan Acara</span>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mt-1">Rangkaian Agenda Halbil IX</h2>
+      </div>
+
+      <div id="timelineContainer" class="relative border-l-2 border-amber-500/30 ml-4 sm:ml-32 space-y-8">
+        <!-- Timeline Item 1 -->
+        <div class="relative pl-8 group">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-neutral-950 border-2 border-amber-500 group-hover:bg-amber-400 transition-colors shadow-[0_0_10px_rgba(245,124,0,0.5)]"></div>
+          <div class="sm:absolute sm:-left-36 sm:top-1 text-xs font-bold text-amber-400 bg-amber-500/10 sm:bg-transparent px-2 py-1 sm:p-0 rounded w-fit mb-2 sm:mb-0 sm:text-right sm:w-28">
+            07:30 - 08:30
+          </div>
+          <div class="p-5 rounded-2xl glass-card group-hover:border-amber-400/40 transition-all">
+            <h3 class="text-base font-serif font-bold text-white mb-1">Registrasi & Ramah Tamah</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">Kedatangan alumni, penyambutan & registrasi ulang ketersediaan souvenir.</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 2 -->
+        <div class="relative pl-8 group">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-neutral-950 border-2 border-amber-500 group-hover:bg-amber-400 transition-colors shadow-[0_0_10px_rgba(245,124,0,0.5)]"></div>
+          <div class="sm:absolute sm:-left-36 sm:top-1 text-xs font-bold text-amber-400 bg-amber-500/10 sm:bg-transparent px-2 py-1 sm:p-0 rounded w-fit mb-2 sm:mb-0 sm:text-right sm:w-28">
+            08:30 - 09:00
+          </div>
+          <div class="p-5 rounded-2xl glass-card group-hover:border-amber-400/40 transition-all">
+            <h3 class="text-base font-serif font-bold text-white mb-1">Pembukaan & Pembacaan Ayat Suci</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">Lantunan suci Al-Qur'an oleh Qori Nasional alumni.</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 3 -->
+        <div class="relative pl-8 group">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-neutral-950 border-2 border-amber-500 group-hover:bg-amber-400 transition-colors shadow-[0_0_10px_rgba(245,124,0,0.5)]"></div>
+          <div class="sm:absolute sm:-left-36 sm:top-1 text-xs font-bold text-amber-400 bg-amber-500/10 sm:bg-transparent px-2 py-1 sm:p-0 rounded w-fit mb-2 sm:mb-0 sm:text-right sm:w-28">
+            09:30 - 10:15
+          </div>
+          <div class="p-5 rounded-2xl glass-card group-hover:border-amber-400/40 transition-all">
+            <h3 class="text-base font-serif font-bold text-white mb-1">Sambutan-Sambutan Utama</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">Sambutan Ketua Panitia, Ketua Umum IAAM, dan Pengasuh Yayasan.</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 4 -->
+        <div class="relative pl-8 group">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-neutral-950 border-2 border-amber-500 group-hover:bg-amber-400 transition-colors shadow-[0_0_10px_rgba(245,124,0,0.5)]"></div>
+          <div class="sm:absolute sm:-left-36 sm:top-1 text-xs font-bold text-amber-400 bg-amber-500/10 sm:bg-transparent px-2 py-1 sm:p-0 rounded w-fit mb-2 sm:mb-0 sm:text-right sm:w-28">
+            10:15 - 12:00
+          </div>
+          <div class="p-5 rounded-2xl glass-card group-hover:border-amber-400/40 transition-all">
+            <h3 class="text-base font-serif font-bold text-white mb-1">Pengajian Akbar & Tausiyah Masyayikh</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">Mutiara hikmah: "Menjaga Nyala Ukhuwah & Cahaya Keilmuan Alumni".</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 5 -->
+        <div class="relative pl-8 group">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-neutral-950 border-2 border-amber-500 group-hover:bg-amber-400 transition-colors shadow-[0_0_10px_rgba(245,124,0,0.5)]"></div>
+          <div class="sm:absolute sm:-left-36 sm:top-1 text-xs font-bold text-amber-400 bg-amber-500/10 sm:bg-transparent px-2 py-1 sm:p-0 rounded w-fit mb-2 sm:mb-0 sm:text-right sm:w-28">
+            12:00 - 13:30
+          </div>
+          <div class="p-5 rounded-2xl glass-card group-hover:border-amber-400/40 transition-all">
+            <h3 class="text-base font-serif font-bold text-white mb-1">Ishoma & Santap Siang</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">Sholat Dzuhur berjamaah dan ramah tamah hidangan prasmanan.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo Gallery & Lightbox Section -->
+    <section id="sec-gallery" class="py-16 px-6 max-w-6xl mx-auto relative z-10">
+      <div class="text-center mb-10">
+        <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">Galeri Kenangan</span>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mt-1">Dokumentasi Silaturahmi</h2>
+      </div>
+
+      <!-- Filter Category Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-8 text-xs font-semibold">
+        <button onclick="filterGallery('all')" class="px-4 py-2 rounded-xl bg-amber-500 text-black font-bold hover:bg-amber-400 transition-all">Semua</button>
+        <button onclick="filterGallery('Acara')" class="px-4 py-2 rounded-xl bg-neutral-900 border border-amber-500/30 text-gray-300 hover:text-white hover:border-amber-400 transition-all">Acara</button>
+        <button onclick="filterGallery('Pengajian')" class="px-4 py-2 rounded-xl bg-neutral-900 border border-amber-500/30 text-gray-300 hover:text-white hover:border-amber-400 transition-all">Pengajian</button>
+        <button onclick="filterGallery('Alumni')" class="px-4 py-2 rounded-xl bg-neutral-900 border border-amber-500/30 text-gray-300 hover:text-white hover:border-amber-400 transition-all">Alumni</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div id="galleryGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <!-- Gallery Item 1 -->
+        <div class="gallery-item group relative h-48 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Acara" onclick="openLightbox('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop&q=80', 'Halbil IAAM VIII 2025')">
+          <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=500&auto=format&fit=crop&q=80" alt="Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+            <span class="text-[10px] text-amber-400 uppercase font-bold">Acara</span>
+            <h4 class="text-xs font-serif font-semibold text-white">Halbil IAAM VIII 2025</h4>
+          </div>
+        </div>
+
+        <!-- Gallery Item 2 -->
+        <div class="gallery-item group relative h-48 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Pengajian" onclick="openLightbox('https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=800&auto=format&fit=crop&q=80', 'Pengajian Akbar Santri & Alumni')">
+          <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=500&auto=format&fit=crop&q=80" alt="Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+            <span class="text-[10px] text-amber-400 uppercase font-bold">Pengajian</span>
+            <h4 class="text-xs font-serif font-semibold text-white">Pengajian Akbar Santri</h4>
+          </div>
+        </div>
+
+        <!-- Gallery Item 3 -->
+        <div class="gallery-item group relative h-48 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Alumni" onclick="openLightbox('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80', 'Reuni Marhalah Lintas Angkatan')">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&auto=format&fit=crop&q=80" alt="Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+            <span class="text-[10px] text-amber-400 uppercase font-bold">Alumni</span>
+            <h4 class="text-xs font-serif font-semibold text-white">Reuni Marhalah</h4>
+          </div>
+        </div>
+
+        <!-- Gallery Item 4 -->
+        <div class="gallery-item group relative h-48 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Acara" onclick="openLightbox('https://images.unsplash.com/photo-1519817650390-64a93db51149?w=800&auto=format&fit=crop&q=80', 'Lentera Malam Tirakatan')">
+          <img src="https://images.unsplash.com/photo-1519817650390-64a93db51149?w=500&auto=format&fit=crop&q=80" alt="Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+            <span class="text-[10px] text-amber-400 uppercase font-bold">Acara</span>
+            <h4 class="text-xs font-serif font-semibold text-white">Lentera Tirakatan</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Documentation Section -->
+    <section id="sec-video" class="py-16 px-6 max-w-5xl mx-auto relative z-10">
+      <div class="text-center mb-12">
+        <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">Video Kilas Balik</span>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mt-1">Rekaman Jejak Ukhuwah</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="p-6 rounded-3xl glass-card shadow-xl flex flex-col">
+          <div class="relative w-full pb-[56.25%] rounded-2xl overflow-hidden mb-4 bg-black border border-amber-500/10">
+            <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Dokumentasi Halbil" allowfullscreen></iframe>
+          </div>
+          <h3 class="text-lg font-serif font-bold text-white mb-1">Dokumentasi Kilas Balik Halbil VIII</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">Momen hangat kebersamaan ribuan alumni pada gelaran Halbil IAAM sebelumnya.</p>
+        </div>
+
+        <div class="p-6 rounded-3xl glass-card shadow-xl flex flex-col">
+          <div class="relative w-full pb-[56.25%] rounded-2xl overflow-hidden mb-4 bg-black border border-amber-500/10">
+            <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Profil Pesantren" allowfullscreen></iframe>
+          </div>
+          <h3 class="text-lg font-serif font-bold text-white mb-1">Profil Yayasan & Pesantren</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">Sejarah perjalanan serta perkembangan sarana pendidikan pesantren.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Donation & Infaq Section -->
+    <section id="sec-donation" class="py-16 px-6 max-w-4xl mx-auto relative z-10">
+      <div class="p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-neutral-900 to-neutral-950 border border-amber-500/30 glass-card shadow-2xl relative overflow-hidden">
+        <div class="text-center mb-8">
+          <div class="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto mb-4 text-amber-400">
+            <i class="fa-solid fa-hand-holding-dollar text-2xl"></i>
+          </div>
+          <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">Infaq & Shadaqah</span>
+          <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white mt-1">Dukungan Penyelenggaraan</h2>
+          <p class="text-xs sm:text-sm text-gray-400 mt-2 max-w-lg mx-auto leading-relaxed">
+            Infaq dan shadaqah Anda akan digunakan sepenuhnya untuk kelancaran operasional Halbil 9 serta santunan anak yatim & duafa di lingkungan pesantren.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          <!-- Bank Card -->
+          <div class="p-6 rounded-2xl bg-neutral-950/80 border border-amber-500/20 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wider">Transfer Bank</span>
+              <h3 class="text-lg font-bold text-white mt-1">Bank Syariah Indonesia (BSI)</h3>
+              <p id="bankAccNo" class="text-2xl font-mono font-extrabold text-amber-300 my-3 tracking-wider">7889 0123 4567 89</p>
+              <p class="text-xs text-gray-400">a.n. <strong class="text-white">Panitia Halbil IAAM 9</strong></p>
+            </div>
+            <button onclick="copyBankAccount()" class="mt-6 w-full py-2.5 px-4 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 font-semibold text-xs flex items-center justify-center gap-2 transition-all">
+              <i id="copyBtnIcon" class="fa-regular fa-copy"></i>
+              <span id="copyBtnText">Salin No. Rekening</span>
+            </button>
+          </div>
+
+          <!-- QRIS Card -->
+          <div class="p-6 rounded-2xl bg-neutral-950/80 border border-amber-500/20 flex flex-col items-center justify-between text-center">
+            <div>
+              <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wider">Scan Quick Response</span>
+              <h3 class="text-lg font-bold text-white mt-1 mb-3">QRIS Infaq Halbil</h3>
+              <div onclick="openQrisModal()" class="w-32 h-32 bg-white p-2 rounded-xl cursor-pointer hover:scale-105 transition-transform border border-amber-400/50 mx-auto flex items-center justify-center">
+                <img id="qrisImg" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021126580016ID.CO.QRIS.WWW01189360091400000000005204581253033605802ID5920PANITIA+HALBIL+IAAM+96006KEDIRI61056411162070703A0163041234" alt="QRIS" class="w-full h-full object-contain" />
+              </div>
+            </div>
+            <button onclick="openQrisModal()" class="mt-6 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md">
+              <i class="fa-solid fa-qrcode"></i> Lihat & Download QRIS
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP Form Section -->
+    <section id="sec-rsvp" class="py-16 px-6 max-w-3xl mx-auto relative z-10">
+      <div class="p-8 sm:p-12 rounded-3xl glass-card shadow-2xl">
+        <div class="text-center mb-8">
+          <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">Konfirmasi Kehadiran</span>
+          <h2 class="text-3xl font-serif font-bold text-white mt-1">Formulir RSVP Online</h2>
+          <p class="text-xs text-gray-400 mt-2">Mohon melengkapi formulir kehadiran untuk membantu kesiapan konsumsi panitia.</p>
+        </div>
+
+        <form id="rsvpForm" onsubmit="handleRsvpSubmit(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 mb-1">Nama Lengkap *</label>
+            <input type="text" id="rsvpName" required placeholder="Contoh: H. Ahmad Zayadi, S.H." class="w-full px-4 py-3 rounded-xl bg-neutral-950 border border-amber-500/20 text-white placeholder-gray-600 focus:outline-none focus:border-amber-400 text-sm" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-gray-300 mb-1">Instansi / Angkatan Alumni</label>
+              <input type="text" id="rsvpInst" placeholder="Contoh: Alumni 2015 / Cabang Kediri" class="w-full px-4 py-3 rounded-xl bg-neutral-950 border border-amber-500/20 text-white placeholder-gray-600 focus:outline-none focus:border-amber-400 text-sm" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-gray-300 mb-1">Nomor WhatsApp *</label>
+              <input type="tel" id="rsvpPhone" required placeholder="081234567890" class="w-full px-4 py-3 rounded-xl bg-neutral-950 border border-amber-500/20 text-white placeholder-gray-600 focus:outline-none focus:border-amber-400 text-sm" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-gray-300 mb-1">Status Kehadiran *</label>
+              <select id="rsvpStatus" class="w-full px-4 py-3 rounded-xl bg-neutral-950 border border-amber-500/20 text-white focus:outline-none focus:border-amber-400 text-sm">
+                <option value="Hadir">InsyaAllah Hadir</option>
+                <option value="Ragu-ragu">Masih Ragu-ragu</option>
+                <option value="Tidak Hadir">Halangan / Tidak Hadir</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-gray-300 mb-1">Jumlah Pendamping (Orang)</label>
+              <input type="number" id="rsvpGuests" min="0" max="10" value="1" class="w-full px-4 py-3 rounded-xl bg-neutral-950 border border-amber-500/20 text-white focus:outline-none focus:border-amber-400 text-sm" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 mb-1">Pesan / Catatan Khusus</label>
+            <textarea id="rsvpMsg" rows="3" placeholder="Tuliskan ucapan singkat atau doa..." class="w-full px-4 py-3 rounded-xl bg-neutral-950 border border-amber-500/20 text-white placeholder-gray-600 focus:outline-none focus:border-amber-400 text-sm resize-none"></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold text-sm tracking-wide shadow-lg hover:shadow-amber-500/30 transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i> Kirim Konfirmasi Kehadiran
+          </button>
+        </form>
+
+        <div id="rsvpSuccessMsg" class="hidden p-6 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-center animate-fade-in mt-4">
+          <i class="fa-solid fa-circle-check text-4xl text-amber-400 mb-3"></i>
+          <h3 class="text-lg font-bold text-white mb-1">Terima Kasih Atas Konfirmasinya!</h3>
+          <p class="text-xs text-gray-300">Data kehadiran Anda telah berhasil tercatat dalam sistem panitia Halbil IAAM 9.</p>
+          <button onclick="resetRsvpForm()" class="mt-4 text-xs text-amber-400 underline font-semibold">Kirim Respon Lain</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Committee WhatsApp Contacts Section -->
+    <section id="sec-committee" class="py-16 px-6 max-w-5xl mx-auto relative z-10">
+      <div class="text-center mb-12">
+        <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">Layanan Informasi</span>
+        <h2 class="text-3xl font-serif font-bold text-white mt-1">Kontak Panitia Pelaksana</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl glass-card text-center flex flex-col items-center justify-between">
+          <div class="flex flex-col items-center">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80" alt="Ketua" class="w-20 h-20 rounded-full object-cover border-2 border-amber-400/50 mb-3" />
+            <h3 class="text-base font-serif font-bold text-white">H. M. Ridwan, S.Pd.I</h3>
+            <span class="text-xs text-amber-400 font-medium mb-4">Ketua Panitia</span>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Assalamu'alaikum%20Panitia%20Halbil%20IAAM%209" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-green-600/20 hover:bg-green-600/30 border border-green-500/40 text-green-300 font-bold text-xs flex items-center justify-center gap-2 transition-all">
+            <i class="fa-brands fa-whatsapp text-sm"></i> Chat WhatsApp
+          </a>
+        </div>
+
+        <div class="p-6 rounded-2xl glass-card text-center flex flex-col items-center justify-between">
+          <div class="flex flex-col items-center">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80" alt="Sekretaris" class="w-20 h-20 rounded-full object-cover border-2 border-amber-400/50 mb-3" />
+            <h3 class="text-base font-serif font-bold text-white">Ust. Abdullah Syukri</h3>
+            <span class="text-xs text-amber-400 font-medium mb-4">Sekretaris Pelaksana</span>
+          </div>
+          <a href="https://wa.me/6281987654321?text=Assalamu'alaikum%20Panitia%20Halbil%20IAAM%209" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-green-600/20 hover:bg-green-600/30 border border-green-500/40 text-green-300 font-bold text-xs flex items-center justify-center gap-2 transition-all">
+            <i class="fa-brands fa-whatsapp text-sm"></i> Chat WhatsApp
+          </a>
+        </div>
+
+        <div class="p-6 rounded-2xl glass-card text-center flex flex-col items-center justify-between">
+          <div class="flex flex-col items-center">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80" alt="Bendahara" class="w-20 h-20 rounded-full object-cover border-2 border-amber-400/50 mb-3" />
+            <h3 class="text-base font-serif font-bold text-white">Hj. Siti Aminah, M.Pd</h3>
+            <span class="text-xs text-amber-400 font-medium mb-4">Bendahara & Infaq</span>
+          </div>
+          <a href="https://wa.me/6281122334455?text=Assalamu'alaikum%20Panitia%20Halbil%20IAAM%209" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-green-600/20 hover:bg-green-600/30 border border-green-500/40 text-green-300 font-bold text-xs flex items-center justify-center gap-2 transition-all">
+            <i class="fa-brands fa-whatsapp text-sm"></i> Chat WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Google Maps Section -->
+    <section id="sec-maps" class="py-16 px-6 max-w-5xl mx-auto relative z-10">
+      <div class="text-center mb-8">
+        <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">Peta Lokasi</span>
+        <h2 class="text-3xl font-serif font-bold text-white mt-1">Panduan Navigasi Gedung</h2>
+      </div>
+
+      <div class="p-4 rounded-3xl glass-card shadow-2xl">
+        <div class="relative w-full h-80 sm:h-96 rounded-2xl overflow-hidden bg-neutral-950 border border-amber-500/10">
+          <iframe id="mapsEmbed" class="w-full h-full border-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.9234123!2d112.0123!3d-7.8123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwNDgnNDQuMyJTIDExMsKwMDAnNDQuMyJF!5e0!3m2!1sid!2sid!4v1600000000000!5m2!1sid!2sid" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guest Wishes / Buku Tamu Section -->
+    <section id="sec-wishes" class="py-16 px-6 max-w-4xl mx-auto relative z-10">
+      <div class="p-8 sm:p-12 rounded-3xl glass-card shadow-2xl">
+        <div class="text-center mb-8">
+          <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">Buku Tamu & Doa</span>
+          <h2 class="text-3xl font-serif font-bold text-white mt-1">Untaian Doa & Salam</h2>
+        </div>
+
+        <form onsubmit="handleWishSubmit(event)" class="mb-8 p-6 rounded-2xl bg-neutral-950/80 border border-amber-500/20 space-y-3">
+          <input type="text" id="wishName" required placeholder="Nama Lengkap Anda" class="w-full px-4 py-2.5 rounded-xl bg-neutral-900 border border-amber-500/20 text-white placeholder-gray-600 focus:outline-none focus:border-amber-400 text-xs" />
+          <textarea id="wishMsg" rows="3" required placeholder="Tuliskan ucapan, kenangan, atau doa untuk alumni & pesantren..." class="w-full px-4 py-2.5 rounded-xl bg-neutral-900 border border-amber-500/20 text-white placeholder-gray-600 focus:outline-none focus:border-amber-400 text-xs resize-none"></textarea>
+          <button type="submit" class="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs flex items-center justify-center gap-2 transition-all">
+            <i class="fa-solid fa-paper-plane"></i> Kirim Ucapan & Doa
+          </button>
+        </form>
+
+        <div id="wishesList" class="space-y-4 max-h-96 overflow-y-auto pr-2">
+          <!-- Wishes rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="sec-footer" class="py-16 px-6 text-center border-t border-amber-500/20 relative z-10 bg-neutral-950">
+      <div class="max-w-4xl mx-auto space-y-6">
+        <div class="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto text-amber-400">
+          <i class="fa-solid fa-lightbulb text-2xl animate-pulse"></i>
+        </div>
+
+        <div class="flex justify-center gap-6">
+          <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=150&auto=format&fit=crop&q=80" alt="IAAM" class="h-10 opacity-80" onerror="this.style.display='none'" />
+          <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=150&auto=format&fit=crop&q=80" alt="Halbil" class="h-10 opacity-80" onerror="this.style.display='none'" />
+          <img src="https://images.unsplash.com/photo-1564769625905-50e93615e769?w=150&auto=format&fit=crop&q=80" alt="Yayasan" class="h-10 opacity-80" onerror="this.style.display='none'" />
+        </div>
+
+        <p class="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto leading-relaxed">
+          Terima kasih atas doa dan kehadiran Bapak/Ibu. Semoga Allah SWT menjadikan IAAM sebagai lentera yang terus menyala dalam menerangi bangsa melalui ilmu, akhlak, dan pengabdian.
+        </p>
+
+        <div class="pt-6 border-t border-neutral-900 text-[11px] text-gray-600">
+          © 2026 Ikatan Alumni Al-Falahul Makkiyah Majidiyah (IAAM). All Rights Reserved.
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightboxModal" class="fixed inset-0 bg-black/90 z-50 p-6 hidden items-center justify-center backdrop-blur-md" onclick="closeLightbox()">
+    <div class="relative max-w-4xl max-h-full text-center" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute -top-10 right-0 text-white hover:text-amber-400 text-2xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt="Zoom" class="max-w-full max-h-[80vh] rounded-2xl object-contain border border-amber-500/30 shadow-2xl mx-auto" />
+      <h3 id="lightboxCaption" class="text-base font-serif font-bold text-white mt-4"></h3>
+    </div>
+  </div>
+
+  <!-- QRIS LARGE MODAL -->
+  <div id="qrisModal" class="fixed inset-0 bg-black/90 z-50 p-6 hidden items-center justify-center backdrop-blur-md" onclick="closeQrisModal()">
+    <div class="relative max-w-sm w-full bg-neutral-900 p-6 rounded-3xl border border-amber-500/30 text-center" onclick="event.stopPropagation()">
+      <button onclick="closeQrisModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+      <h3 class="text-lg font-serif font-bold text-white mb-4">Scan QRIS Infaq</h3>
+      <div class="bg-white p-4 rounded-2xl mb-4 border border-amber-400">
+        <img id="qrisModalImg" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021126580016ID.CO.QRIS.WWW01189360091400000000005204581253033605802ID5920PANITIA+HALBIL+IAAM+96006KEDIRI61056411162070703A0163041234" alt="QRIS Large" class="w-full h-auto" />
+      </div>
+      <p class="text-xs text-gray-400 mb-4">Dapat di-scan menggunakan seluruh aplikasi m-Banking dan E-Wallet.</p>
+      <a id="qrisDownloadLink" href="#" download="QRIS_Halbil_IAAM_9.png" target="_blank" class="w-full py-2.5 rounded-xl bg-amber-500 text-black font-bold text-xs flex items-center justify-center gap-2">
+        <i class="fa-solid fa-download"></i> Download Gambar QRIS
+      </a>
+    </div>
+  </div>
+
+  <!-- CMS ADMIN DASHBOARD MODAL -->
+  <div id="adminModal" class="fixed inset-0 bg-black/80 z-50 p-4 sm:p-8 hidden items-center justify-center backdrop-blur-md">
+    <div class="bg-neutral-900 border border-amber-500/30 w-full max-w-5xl h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+      <div class="p-6 border-b border-amber-500/20 flex items-center justify-between bg-neutral-950">
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-sliders text-amber-400 text-xl"></i>
+          <h2 class="text-xl font-serif font-bold text-white">CMS Admin Dashboard - Halbil IAAM 9</h2>
+        </div>
+        <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <div class="flex overflow-x-auto bg-neutral-950/50 border-b border-amber-500/10 p-2 gap-2 text-xs font-semibold">
+        <button onclick="switchAdminTab('general')" class="admin-tab-btn active px-4 py-2 rounded-xl bg-amber-500 text-black">Utama & Hero</button>
+        <button onclick="switchAdminTab('rsvps')" class="admin-tab-btn px-4 py-2 rounded-xl text-gray-400 hover:text-white">Kelola RSVP (<span id="rsvpCountBadge">3</span>)</button>
+      </div>
+
+      <div class="p-6 overflow-y-auto flex-1 text-xs space-y-4">
+        <div id="adminTabGeneral" class="space-y-4">
+          <h3 class="text-sm font-bold text-amber-400 uppercase">Judul & Organisasi</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-gray-300 mb-1">Judul Utama</label>
+              <input type="text" id="editHeroTitle" class="w-full p-2.5 rounded-lg bg-neutral-950 border border-neutral-700 text-white" />
+            </div>
+            <div>
+              <label class="block text-gray-300 mb-1">Sub Judul</label>
+              <input type="text" id="editHeroSubtitle" class="w-full p-2.5 rounded-lg bg-neutral-950 border border-neutral-700 text-white" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-gray-300 mb-1">Penyelenggara</label>
+            <input type="text" id="editHeroOrganizer" class="w-full p-2.5 rounded-lg bg-neutral-950 border border-neutral-700 text-white" />
+          </div>
+          <div>
+            <label class="block text-gray-300 mb-1">Tema Acara</label>
+            <input type="text" id="editHeroQuote" class="w-full p-2.5 rounded-lg bg-neutral-950 border border-neutral-700 text-white" />
+          </div>
+
+          <h3 class="text-sm font-bold text-amber-400 uppercase pt-4">Waktu & Tempat</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-gray-300 mb-1">Tanggal Teks</label>
+              <input type="text" id="editDate" class="w-full p-2.5 rounded-lg bg-neutral-950 border border-neutral-700 text-white" />
+            </div>
+            <div>
+              <label class="block text-gray-300 mb-1">Jam Teks</label>
+              <input type="text" id="editTime" class="w-full p-2.5 rounded-lg bg-neutral-950 border border-neutral-700 text-white" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-gray-300 mb-1">Nama Tempat</label>
+            <input type="text" id="editVenueName" class="w-full p-2.5 rounded-lg bg-neutral-950 border border-neutral-700 text-white" />
+          </div>
+        </div>
+
+        <div id="adminTabRsvps" class="hidden space-y-4">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-bold text-amber-400 uppercase">Daftar RSVP Terdaftar</h3>
+            <button onclick="exportRsvpCSV()" class="py-2 px-4 rounded-xl bg-amber-500 text-black font-bold flex items-center gap-2 hover:bg-amber-400">
+              <i class="fa-solid fa-file-excel"></i> Export CSV Excel
+            </button>
+          </div>
+          <div class="overflow-x-auto border border-neutral-800 rounded-xl">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-neutral-950 text-amber-400 border-b border-neutral-800">
+                  <th class="p-3">Nama</th>
+                  <th class="p-3">Instansi</th>
+                  <th class="p-3">WhatsApp</th>
+                  <th class="p-3">Status</th>
+                  <th class="p-3">Tamu</th>
+                  <th class="p-3">Pesan</th>
+                </tr>
+              </thead>
+              <tbody id="adminRsvpTable">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 border-t border-amber-500/20 bg-neutral-950 flex justify-end gap-3">
+        <button onclick="saveAdminChanges()" class="py-2 px-6 rounded-xl bg-amber-500 text-black font-bold text-xs">Simpan Perubahan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOMIZER DRAWER MODAL -->
+  <div id="customizerDrawer" class="fixed inset-0 bg-black/70 z-50 hidden justify-end backdrop-blur-sm" onclick="closeCustomizerDrawer()">
+    <div class="w-full max-w-md bg-neutral-900 border-l border-amber-500/30 h-full p-6 overflow-y-auto space-y-6 text-xs" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between border-b border-amber-500/20 pb-4">
+        <div class="flex items-center gap-2 text-amber-400 font-bold">
+          <i class="fa-solid fa-palette text-lg"></i>
+          <h3 class="text-base font-serif text-white">Kustomisasi Tampilan</h3>
+        </div>
+        <button onclick="closeCustomizerDrawer()" class="text-gray-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div>
+        <label class="block text-gray-300 mb-2 font-semibold">Kepadatan Partikel Cahaya</label>
+        <input type="range" id="particleSlider" min="10" max="80" value="35" oninput="updateParticleDensity(this.value)" class="w-full accent-amber-500" />
+        <span id="particleVal" class="text-amber-400 font-mono mt-1 block text-right">35 Partikel</span>
+      </div>
+
+      <div>
+        <h4 class="text-amber-400 font-bold uppercase mb-3">Tampilkan / Sembunyikan Bagian</h4>
+        <div class="space-y-2">
+          <label class="flex items-center justify-between p-2.5 rounded-xl bg-neutral-950 border border-neutral-800 text-gray-300">
+            <span>Bagian Penceramah</span>
+            <input type="checkbox" checked onchange="toggleSection('sec-speakers', this.checked)" class="accent-amber-500 w-4 h-4" />
+          </label>
+          <label class="flex items-center justify-between p-2.5 rounded-xl bg-neutral-950 border border-neutral-800 text-gray-300">
+            <span>Bagian Timeline</span>
+            <input type="checkbox" checked onchange="toggleSection('sec-timeline', this.checked)" class="accent-amber-500 w-4 h-4" />
+          </label>
+          <label class="flex items-center justify-between p-2.5 rounded-xl bg-neutral-950 border border-neutral-800 text-gray-300">
+            <span>Bagian Galeri Kenangan</span>
+            <input type="checkbox" checked onchange="toggleSection('sec-gallery', this.checked)" class="accent-amber-500 w-4 h-4" />
+          </label>
+          <label class="flex items-center justify-between p-2.5 rounded-xl bg-neutral-950 border border-neutral-800 text-gray-300">
+            <span>Bagian Video Dokumentasi</span>
+            <input type="checkbox" checked onchange="toggleSection('sec-video', this.checked)" class="accent-amber-500 w-4 h-4" />
+          </label>
+          <label class="flex items-center justify-between p-2.5 rounded-xl bg-neutral-950 border border-neutral-800 text-gray-300">
+            <span>Bagian Infaq & QRIS</span>
+            <input type="checkbox" checked onchange="toggleSection('sec-donation', this.checked)" class="accent-amber-500 w-4 h-4" />
+          </label>
+        </div>
+      </div>
+
+      <button onclick="closeCustomizerDrawer()" class="w-full py-3 rounded-xl bg-amber-500 text-black font-bold shadow-lg">Simpan Pengaturan</button>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed top-6 right-6 z-50 bg-amber-500 text-black px-5 py-3 rounded-xl font-bold text-xs shadow-2xl transition-all duration-300 transform translate-y-[-100px] opacity-0 flex items-center gap-2">
+    <i class="fa-solid fa-circle-check"></i> <span id="toastMsg">Notification</span>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC ENGINE -->
+  <script>
+    // State storage
+    const state = {
+      eventDate: "2026-04-18T08:00:00",
+      isPlaying: false,
+      particleDensity: 35,
+      rsvps: [
+        { name: "Ahmad Fauzi", institution: "Alumni 2012", phone: "081233445566", status: "Hadir", guests: 2, message: "InsyaAllah hadir bersama keluarga." },
+        { name: "Dewi Rahmawati", institution: "Alumni 2018", phone: "081998877665", status: "Hadir", guests: 1, message: "Siap meramaikan silaturahmi." },
+        { name: "M. Rizky Pratama", institution: "Alumni 2020", phone: "082112233445", status: "Tidak Hadir", guests: 0, message: "Mohon maaf belum bisa hadir." }
+      ],
+      wishes: [
+        { name: "K.H. Nur Hadi", message: "Barakallah untuk gelaran Halbil IAAM 9. Semoga alumni semakin kompak dan membawa sinar kebaikan bagi umat.", date: "2 jam yang lalu" },
+        { name: "Siti Nurjanah", message: "Tidak sabar ingin mendengarkan tausiyah Gus Baha dan sungkem ke para masyayikh.", date: "5 jam yang lalu" }
+      ]
+    };
+
+    // Canvas Floating Particles Simulation
+    let canvas, ctx, particles = [];
+    function initCanvas() {
+      canvas = document.getElementById('lanternCanvas');
+      ctx = canvas.getContext('2d');
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      createParticles();
+      animateParticles();
+    }
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function createParticles() {
+      particles = [];
+      for (let i = 0; i < state.particleDensity; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 3 + 1.5,
+          speedY: -(Math.random() * 0.6 + 0.2),
+          speedX: (Math.random() - 0.5) * 0.4,
+          opacity: Math.random() * 0.7 + 0.3
+        });
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.y += p.speedY;
+        p.x += p.speedX;
+        if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+        if (p.x < -10) p.x = canvas.width + 10;
+        if (p.x > canvas.width + 10) p.x = -10;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = "#F57C00";
+        ctx.globalAlpha = p.opacity;
+        ctx.shadowBlur = p.size * 4;
+        ctx.shadowColor = "#FFC107";
+        ctx.fill();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    // Countdown Timer Loop
+    function updateCountdown() {
+      const target = new Date(state.eventDate).getTime();
+      const now = new Date().getTime();
+      const diff = target - now;
+
+      if (diff > 0) {
+        document.getElementById('cd-days').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        document.getElementById('cd-hours').innerText = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+        document.getElementById('cd-minutes').innerText = String(Math.floor((diff / 1000 / 60) % 60)).padStart(2, '0');
+        document.getElementById('cd-seconds').innerText = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+      } else {
+        document.getElementById('cd-days').innerText = "00";
+        document.getElementById('cd-hours').innerText = "00";
+        document.getElementById('cd-minutes').innerText = "00";
+        document.getElementById('cd-seconds').innerText = "00";
+      }
+    }
+
+    // Interaction Handlers
+    function openInvitation() {
+      document.getElementById('openBtn').classList.add('hidden');
+      document.getElementById('openedBadge').classList.remove('hidden');
+      document.getElementById('openedBadge').classList.add('flex');
+      
+      const content = document.getElementById('invitationContent');
+      content.classList.remove('opacity-40', 'pointer-events-none', 'filter', 'blur-sm');
+      content.classList.add('opacity-100');
+
+      document.getElementById('audioBtn').classList.remove('hidden');
+      toggleAudio(true);
+
+      document.getElementById('sec-guest').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function toggleAudio(forcePlay = false) {
+      const audio = document.getElementById('bgMusic');
+      const icon = document.getElementById('audioIcon');
+      
+      if (forcePlay || !state.isPlaying) {
+        audio.play().then(() => {
+          state.isPlaying = true;
+          icon.className = "fa-solid fa-volume-high text-lg";
+        }).catch(e => console.log(e));
+      } else {
+        audio.pause();
+        state.isPlaying = false;
+        icon.className = "fa-solid fa-volume-xmark text-lg";
+      }
+    }
+
+    function copyBankAccount() {
+      const acc = document.getElementById('bankAccNo').innerText;
+      navigator.clipboard.writeText(acc);
+      showToast("Nomor rekening berhasil disalin!");
+      document.getElementById('copyBtnIcon').className = "fa-solid fa-check text-green-400";
+      document.getElementById('copyBtnText').innerText = "Tersalin!";
+      setTimeout(() => {
+        document.getElementById('copyBtnIcon').className = "fa-regular fa-copy";
+        document.getElementById('copyBtnText').innerText = "Salin No. Rekening";
+      }, 2500);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').innerText = msg;
+      toast.classList.remove('translate-y-[-100px]', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-[-100px]', 'opacity-0');
+      }, 3000);
+    }
+
+    // RSVP Form Logic
+    function handleRsvpSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('rsvpName').value;
+      const institution = document.getElementById('rsvpInst').value;
+      const phone = document.getElementById('rsvpPhone').value;
+      const status = document.getElementById('rsvpStatus').value;
+      const guests = document.getElementById('rsvpGuests').value;
+      const message = document.getElementById('rsvpMsg').value;
+
+      state.rsvps.unshift({ name, institution, phone, status, guests, message });
+      renderRsvpAdminTable();
+
+      document.getElementById('rsvpForm').classList.add('hidden');
+      document.getElementById('rsvpSuccessMsg').classList.remove('hidden');
+      showToast("Konfirmasi RSVP berhasil terkirim!");
+    }
+
+    function resetRsvpForm() {
+      document.getElementById('rsvpForm').reset();
+      document.getElementById('rsvpForm').classList.remove('hidden');
+      document.getElementById('rsvpSuccessMsg').classList.add('hidden');
+    }
+
+    // Wishes Logic
+    function handleWishSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('wishName').value;
+      const message = document.getElementById('wishMsg').value;
+
+      state.wishes.unshift({ name, message, date: "Baru saja" });
+      renderWishes();
+      document.getElementById('wishName').value = '';
+      document.getElementById('wishMsg').value = '';
+      showToast("Ucapan & doa berhasil terkirim!");
+    }
+
+    function renderWishes() {
+      const list = document.getElementById('wishesList');
+      list.innerHTML = state.wishes.map(w => `
+        <div class="p-5 rounded-2xl bg-neutral-950/60 border border-amber-500/15">
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="text-sm font-serif font-bold text-amber-300">${w.name}</h4>
+            <span class="text-[10px] text-gray-500">${w.date}</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-relaxed">${w.message}</p>
+        </div>
+      `).join('');
+    }
+
+    // Lightbox & Modals
+    function openLightbox(url, caption) {
+      document.getElementById('lightboxImg').src = url;
+      document.getElementById('lightboxCaption').innerText = caption;
+      document.getElementById('lightboxModal').classList.remove('hidden');
+      document.getElementById('lightboxModal').classList.add('flex');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightboxModal').classList.remove('flex');
+      document.getElementById('lightboxModal').classList.add('hidden');
+    }
+
+    function openQrisModal() {
+      document.getElementById('qrisModal').classList.remove('hidden');
+      document.getElementById('qrisModal').classList.add('flex');
+    }
+
+    function closeQrisModal() {
+      document.getElementById('qrisModal').classList.remove('flex');
+      document.getElementById('qrisModal').classList.add('hidden');
+    }
+
+    function openCustomizerDrawer() {
+      document.getElementById('customizerDrawer').classList.remove('hidden');
+      document.getElementById('customizerDrawer').classList.add('flex');
+    }
+
+    function closeCustomizerDrawer() {
+      document.getElementById('customizerDrawer').classList.remove('flex');
+      document.getElementById('customizerDrawer').classList.add('hidden');
+    }
+
+    function updateParticleDensity(val) {
+      state.particleDensity = parseInt(val);
+      document.getElementById('particleVal').innerText = val + " Partikel";
+      createParticles();
+    }
+
+    function toggleSection(id, show) {
+      const el = document.getElementById(id);
+      if (el) {
+        if (show) el.classList.remove('hidden');
+        else el.classList.add('hidden');
+      }
+    }
+
+    function filterGallery(cat) {
+      const items = document.querySelectorAll('.gallery-item');
+      items.forEach(item => {
+        if (cat === 'all' || item.dataset.category === cat) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
+    // Admin CMS Functions
+    function openAdminModal() {
+      document.getElementById('editHeroTitle').value = document.getElementById('heroTitle').innerText;
+      document.getElementById('editHeroSubtitle').value = document.getElementById('heroSubtitle').innerText;
+      document.getElementById('editHeroOrganizer').value = document.getElementById('heroOrganizer').innerText;
+      document.getElementById('editHeroQuote').value = document.getElementById('heroThemeQuote').innerText.replace(/"/g, '');
+      document.getElementById('editDate').value = document.getElementById('displayDate').innerText;
+      document.getElementById('editTime').value = document.getElementById('displayTime').innerText;
+      document.getElementById('editVenueName').value = document.getElementById('displayVenueName').innerText;
+
+      renderRsvpAdminTable();
+      document.getElementById('adminModal').classList.remove('hidden');
+      document.getElementById('adminModal').classList.add('flex');
+    }
+
+    function closeAdminModal() {
+      document.getElementById('adminModal').classList.remove('flex');
+      document.getElementById('adminModal').classList.add('hidden');
+    }
+
+    function saveAdminChanges() {
+      document.getElementById('heroTitle').innerText = document.getElementById('editHeroTitle').value;
+      document.getElementById('heroSubtitle').innerText = document.getElementById('editHeroSubtitle').value;
+      document.getElementById('heroOrganizer').innerText = document.getElementById('editHeroOrganizer').value;
+      document.getElementById('heroThemeQuote').innerText = `"${document.getElementById('editHeroQuote').value}"`;
+      document.getElementById('displayDate').innerText = document.getElementById('editDate').value;
+      document.getElementById('displayTime').innerText = document.getElementById('editTime').value;
+      document.getElementById('displayVenueName').innerText = document.getElementById('editVenueName').value;
+
+      closeAdminModal();
+      showToast("Perubahan data telah disimpan!");
+    }
+
+    function switchAdminTab(tab) {
+      const btns = document.querySelectorAll('.admin-tab-btn');
+      btns.forEach(b => b.className = "admin-tab-btn px-4 py-2 rounded-xl text-gray-400 hover:text-white");
+      
+      if (tab === 'general') {
+        document.getElementById('adminTabGeneral').classList.remove('hidden');
+        document.getElementById('adminTabRsvps').classList.add('hidden');
+      } else {
+        document.getElementById('adminTabGeneral').classList.add('hidden');
+        document.getElementById('adminTabRsvps').classList.remove('hidden');
+      }
+    }
+
+    function renderRsvpAdminTable() {
+      document.getElementById('rsvpCountBadge').innerText = state.rsvps.length;
+      const tbody = document.getElementById('adminRsvpTable');
+      tbody.innerHTML = state.rsvps.map(r => `
+        <tr class="border-b border-neutral-800/50 hover:bg-neutral-800/40">
+          <td class="p-3 font-semibold text-white">${r.name}</td>
+          <td class="p-3 text-gray-300">${r.institution || '-'}</td>
+          <td class="p-3 text-amber-300">${r.phone}</td>
+          <td class="p-3">
+            <span class="px-2 py-1 rounded text-[10px] font-bold ${r.status === 'Hadir' ? 'bg-green-500/20 text-green-300' : 'bg-red-500/20 text-red-300'}">
+              ${r.status}
+            </span>
+          </td>
+          <td class="p-3 text-white text-center">${r.guests}</td>
+          <td class="p-3 text-gray-400">${r.message || '-'}</td>
+        </tr>
+      `).join('');
+    }
+
+    function exportRsvpCSV() {
+      const headers = "Nama,Instansi,WhatsApp,Status,Pendamping,Pesan\n";
+      const rows = state.rsvps.map(r => `"${r.name}","${r.institution}","${r.phone}","${r.status}","${r.guests}","${r.message}"`).join("\n");
+      const blob = new Blob([headers + rows], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `RSVP_Halbil_IAAM_9.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast("File CSV RSVP berhasil didownload!");
+    }
+
+    // App Initialization
+    window.onload = function() {
+      // Parse guest URL parameter e.g. ?to=Bapak+Hasan
+      const params = new URLSearchParams(window.location.search);
+      const guestParam = params.get('to') || params.get('n') || params.get('guest');
+      if (guestParam) {
+        document.getElementById('displayGuestName').innerText = decodeURIComponent(guestParam);
+      }
+
+      initCanvas();
+      renderWishes();
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+
+      // Dismiss loading screen with smooth fade out
+      setTimeout(() => {
+        const loader = document.getElementById('loadingScreen');
+        loader.classList.add('opacity-0');
+        setTimeout(() => loader.classList.add('hidden'), 700);
+      }, 1200);
+    };
+  </script>
+</body>
+  </html>
