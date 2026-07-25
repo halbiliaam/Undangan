@@ -106,19 +106,29 @@
 <body class="relative min-h-screen">
 
   <div id="loadingScreen" class="fixed inset-0 z-50 bg-[#0F0F0F] flex flex-col items-center justify-center transition-opacity duration-700 p-6">
-    <div class="relative flex items-center justify-center mb-6">
-      <div class="w-28 h-28 rounded-full bg-amber-500/20 animate-ping absolute"></div>
-      <div class="relative z-10 w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center shadow-[0_0_35px_rgba(245,124,0,0.7)]">
-        <div class="relative z-10 w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center shadow-[0_0_35px_rgba(245,124,0,0.7)]">
-    <h2 class="text-2xl font-bold tracking-widest text-amber-400 font-serif mb-2 text-center">بسم الله الرحمن الرحيم</h2>
+<div class="relative flex flex-col items-center justify-center mb-6">
+
+  <!-- Tulisan di atas logo -->
+  <h2 class="absolute -top-12 text-2xl font-serif font-bold text-amber-400 text-center whitespace-nowrap">
+    بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+  </h2>
+
+  <!-- Efek lingkaran -->
+  <div class="w-28 h-28 rounded-full bg-amber-500/20 animate-ping absolute"></div>
+
+  <!-- Logo -->
+  <div class="relative z-10 w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center shadow-[0_0_35px_rgba(245,124,0,0.7)]">
     <img
-        src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Project 1 (20260725044513).png"
-        class="w-18 h-18 object-contain animate-pulse">
+      src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Project%201%20(20260725044513).png"
+      class="w-16 h-16 object-contain animate-pulse"
+      alt="Logo">
+  </div>
 
 </div>
-      </div>
-    </div>
-    <h2 class="text-2xl font-bold tracking-widest text-amber-400 font-serif mb-2 text-center">HALBIL IAAM 9</h2>
+
+<h2 class="text-2xl font-bold tracking-widest text-amber-400 font-serif mb-2 text-center">
+  HALBIL IAAM 9
+</h2>
     <p class="text-xs text-gray-400 tracking-widest uppercase mb-6 text-center">Memuat Undangan Digital...</p>
     <div class="w-48 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
       <div class="h-full bg-gradient-to-r from-amber-500 to-orange-500 animate-pulse w-3/4 rounded-full"></div>
