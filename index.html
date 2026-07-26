@@ -105,75 +105,130 @@
 </head>
 <body class="relative min-h-screen">
 
-<div id="loadingScreen" class="fixed inset-0 z-50 bg-[#0F0F0F] flex flex-col items-center justify-center transition-opacity duration-700 overflow-hidden">
+<div id="loadingScreen"
+     class="fixed inset-0 z-50 bg-[#0F0F0F] overflow-hidden">
 
     <!-- Basmalah -->
     <h2 class="absolute top-8 left-1/2 -translate-x-1/2
-        text-2xl sm:text-3xl md:text-4xl
-        font-arabic text-amber-300
-        text-center whitespace-nowrap
-        drop-shadow-lg z-20">
+               text-2xl sm:text-3xl md:text-4xl
+               font-arabic text-amber-300
+               whitespace-nowrap text-center
+               drop-shadow-lg z-30">
         بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
     </h2>
 
-    <!-- Cahaya Belakang -->
-    <div class="absolute w-[380px] h-[380px] sm:w-[500px] sm:h-[500px]
-        rounded-full bg-amber-400/10 blur-3xl animate-pulse-glow">
-    </div>
+    <!-- Area Tengah -->
+    <div class="absolute inset-0 flex items-center justify-center">
 
-    <!-- Lingkaran Ping -->
-    <div class="absolute w-72 h-72 sm:w-96 sm:h-96
-        rounded-full bg-amber-500/20 animate-ping">
-    </div>
-
-    <!-- Logo -->
-    <div class="relative z-10
-        w-60 h-60 sm:w-72 sm:h-72
-        rounded-full
-        bg-gradient-to-br
-        from-amber-500
-        to-orange-600
-        flex items-center justify-center
-        shadow-[0_0_80px_rgba(245,124,0,0.8)]">
-
-        <img
-            src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Project%201%20(20260725044513).png"
-            alt="Logo"
-            class="w-48 h-48 sm:w-56 sm:h-56 object-contain animate-pulse">
-
-    </div>
-
-    <!-- Judul -->
-    <h2 class="mt-10
-        text-4xl sm:text-5xl
-        font-bold
-        tracking-[0.35em]
-        text-amber-400
-        font-serif
-        text-center">
-        HALBIL IAAM 9
-    </h2>
-
-    <!-- Sub Judul -->
-    <p class="mt-3
-        text-sm
-        uppercase
-        tracking-[0.35em]
-        text-gray-400
-        text-center">
-        Memuat Undangan Digital...
-    </p>
-
-    <!-- Loading -->
-    <div class="mt-8 w-72 sm:w-96 h-2 bg-neutral-800 rounded-full overflow-hidden">
-        <div class="h-full w-3/4 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-400 rounded-full animate-pulse">
+        <!-- Glow Belakang -->
+        <div class="absolute
+                    w-[380px] h-[380px]
+                    sm:w-[500px] sm:h-[500px]
+                    rounded-full
+                    bg-amber-400/15
+                    blur-[90px]
+                    animate-pulse-glow">
         </div>
+
+        <!-- Lingkaran Ping -->
+        <div class="absolute
+                    w-72 h-72
+                    sm:w-96 sm:h-96
+                    rounded-full
+                    border border-amber-300/20
+                    bg-amber-500/10
+                    animate-ping">
+        </div>
+
+        <!-- Lingkaran Glow -->
+        <div class="absolute
+                    w-80 h-80
+                    sm:w-[430px] sm:h-[430px]
+                    rounded-full
+                    border border-amber-400/15">
+        </div>
+
+        <!-- Logo -->
+        <div class="relative z-20
+                    w-60 h-60
+                    sm:w-72 sm:h-72
+                    rounded-full
+                    bg-gradient-to-br
+                    from-amber-500
+                    via-orange-500
+                    to-orange-700
+                    flex items-center justify-center
+                    shadow-[0_0_80px_rgba(245,158,11,.65)]">
+
+            <img
+                src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Project%201%20(20260725044513).png"
+                alt="Logo"
+                class="w-48 h-48 sm:w-56 sm:h-56 object-contain animate-pulse">
+
+        </div>
+
+    </div>
+
+    <!-- Bagian Bawah -->
+    <div class="absolute
+                left-1/2
+                top-[72%]
+                -translate-x-1/2
+                w-full
+                px-6
+                z-30">
+
+        <!-- Judul -->
+<h2 class="text-center
+           text-2xl sm:text-3xl md:text-4xl
+           font-bold
+           tracking-[0.12em]
+           text-amber-400
+           font-serif
+           drop-shadow-[0_0_12px_rgba(251,191,36,.35)]">
+    HALBIL IAAM 9
+</h2>
+
+<!-- Sub Judul -->
+<p class="mt-2
+          text-center
+          text-xs sm:text-sm
+          uppercase
+          tracking-[0.18em]
+          text-gray-400">
+    Memuat Undangan Digital...
+</p>
+
+        <!-- Loading -->
+        <div class="mt-8 mx-auto
+                    w-72 sm:w-96
+                    h-2
+                    bg-neutral-800
+                    rounded-full
+                    overflow-hidden">
+
+            <div class="h-full
+                        w-3/4
+                        rounded-full
+                        bg-gradient-to-r
+                        from-amber-500
+                        via-orange-500
+                        to-amber-300
+                        animate-pulse">
+            </div>
+
+        </div>
+
     </div>
 
 </div>
 
-<canvas id="lanternCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+<!-- Canvas Efek Lentera -->
+<canvas id="lanternCanvas"
+        class="fixed inset-0 pointer-events-none z-0">
+</canvas>
 
+</body>
   <!-- HTML5 Audio Sound Engine -->
   <audio id="bgMusic" loop preload="auto">
     <source src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/bg%20musik.mp3" type="audio/mpeg">
