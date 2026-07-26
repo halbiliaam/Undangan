@@ -747,7 +747,7 @@
       <div class="flex flex-wrap items-center justify-center gap-2 mb-8 text-xs font-semibold">
         <button onclick="filterGallery('all')" class="px-4 py-2 rounded-xl bg-amber-500 text-black font-bold hover:bg-amber-400 transition-all">Semua</button>
         <button onclick="filterGallery('Kiyai')" class="px-4 py-2 rounded-xl bg-neutral-900 border border-amber-500/30 text-gray-300 hover:text-white hover:border-amber-400 transition-all">Kiyai</button>
-        <button onclick="filterGallery('Acara')" class="px-4 py-2 rounded-xl bg-neutral-900 border border-amber-500/30 text-gray-300 hover:text-white hover:border-amber-400 transition-all">Pengajian</button>
+        <button onclick="filterGallery('Acara')" class="px-4 py-2 rounded-xl bg-neutral-900 border border-amber-500/30 text-gray-300 hover:text-white hover:border-amber-400 transition-all">acara</button>
         <button onclick="filterGallery('Alumni')" class="px-4 py-2 rounded-xl bg-neutral-900 border border-amber-500/30 text-gray-300 hover:text-white hover:border-amber-400 transition-all">Alumni</button>
       </div>
 
@@ -763,13 +763,78 @@
         </div>
 
         <!-- Gallery Item 2 -->
-        <div class="gallery-item group relative h-48 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Kiyai" onclick="openLightbox('https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid.png', 'K.H. Abdul Majid Syu'ieb')">
-          <img src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid.png" alt="Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
-            <span class="text-[10px] text-amber-400 uppercase font-bold">Sang Kiyai</span>
-            <h4 class="text-xs font-serif font-semibold text-white">K.H. Abdul Majid Syu'ieb</h4>
-          </div>
+<div class="gallery-item relative rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md">
+
+    <!-- Judul -->
+    <div class="px-4 py-3 border-b border-amber-500/20 bg-gradient-to-r from-amber-900/30 to-neutral-900">
+        <span class="text-xs text-amber-400 uppercase font-bold tracking-widest">
+            Sang Kiyai
+        </span>
+        <h4 class="text-sm font-serif font-semibold text-white mt-1">
+            Dokumentasi K.H. Abdul Majid Syu'ieb
+        </h4>
+    </div>
+
+    <!-- Grid Foto -->
+    <div class="grid grid-cols-2 gap-2 p-2">
+
+        <!-- Foto 1 -->
+        <div class="overflow-hidden rounded-xl">
+            <img
+                src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid.png"
+                class="w-full h-44 object-cover cursor-pointer transition-transform duration-500 hover:scale-110"
+                loading="lazy"
+                onclick="openLightbox('https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid.png. Abdul Majid Syu\\'ieb - Foto 1')">
         </div>
+
+        <!-- Foto 2 -->
+        <div class="overflow-hidden rounded-xl">
+            <img
+                src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid1.png"
+                class="w-full h-44 object-cover cursor-pointer transition-transform duration-500 hover:scale-110"
+                loading="lazy"
+                onclick="openLightbox('https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid1.png. Abdul Majid Syu\\'ieb - Foto 2')">
+        </div>
+
+        <!-- Foto 3 -->
+        <div class="overflow-hidden rounded-xl">
+            <img
+                src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid2.png"
+                class="w-full h-44 object-cover cursor-pointer transition-transform duration-500 hover:scale-110"
+                loading="lazy"
+                onclick="openLightbox('https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid2.png. Abdul Majid Syu\\'ieb - Foto 3')">
+        </div>
+
+        <!-- Foto 4 -->
+        <div class="overflow-hidden rounded-xl">
+            <img
+                src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid5.png"
+                class="w-full h-44 object-cover cursor-pointer transition-transform duration-500 hover:scale-110"
+                loading="lazy"
+                onclick="openLightbox('https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid5.png. Abdul Majid Syu\\'ieb - Foto 4')">
+        </div>
+
+        <!-- Foto 5 -->
+        <div class="overflow-hidden rounded-xl">
+            <img
+                src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid6.jpg"
+                class="w-full h-44 object-cover cursor-pointer transition-transform duration-500 hover:scale-110"
+                loading="lazy"
+                onclick="openLightbox('https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid6.jpg. Abdul Majid Syu\\'ieb - Foto 5')">
+        </div>
+
+        <!-- Foto 6 -->
+        <div class="overflow-hidden rounded-xl">
+            <img
+                src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid7.jpg"
+                class="w-full h-44 object-cover cursor-pointer transition-transform duration-500 hover:scale-110"
+                loading="lazy"
+                onclick="openLightbox('https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid7.jpg. Abdul Majid Syu\\'ieb - Foto 6')">
+        </div>
+
+    </div>
+
+</div>
 
         <!-- Gallery Item 3 -->
         <div class="gallery-item group relative h-48 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Alumni" onclick="openLightbox('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80', 'Reuni Marhalah Lintas Angkatan')">
