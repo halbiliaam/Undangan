@@ -105,37 +105,74 @@
 </head>
 <body class="relative min-h-screen">
 
-  <div id="loadingScreen" class="fixed inset-0 z-50 bg-[#0F0F0F] flex flex-col items-center justify-center transition-opacity duration-700 p-6">
-<div class="relative flex flex-col items-center justify-center mb-6">
+<div id="loadingScreen" class="fixed inset-0 z-50 bg-[#0F0F0F] flex flex-col items-center justify-center transition-opacity duration-700 overflow-hidden">
 
-  <!-- Tulisan di atas logo -->
-  <h2 class="absolute -top-15 text-2xl font-amiri font-reguler text-amber-400 text-center whitespace-nowrap">
-    بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
-  </h2>
+    <!-- Basmalah -->
+    <h2 class="absolute top-8 left-1/2 -translate-x-1/2
+        text-2xl sm:text-3xl md:text-4xl
+        font-arabic text-amber-300
+        text-center whitespace-nowrap
+        drop-shadow-lg z-20">
+        بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+    </h2>
 
-  <!-- Efek lingkaran -->
-  <div class="w-28 h-28 rounded-full bg-amber-500/20 animate-ping absolute"></div>
+    <!-- Cahaya Belakang -->
+    <div class="absolute w-[380px] h-[380px] sm:w-[500px] sm:h-[500px]
+        rounded-full bg-amber-400/10 blur-3xl animate-pulse-glow">
+    </div>
 
-  <!-- Logo -->
-  <div class="relative z-10 w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center shadow-[0_0_35px_rgba(245,124,0,0.7)]">
-    <img
-      src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Project%201%20(20260725044513).png"
-      class="w-16 h-16 object-contain animate-pulse"
-      alt="Logo">
-  </div>
+    <!-- Lingkaran Ping -->
+    <div class="absolute w-72 h-72 sm:w-96 sm:h-96
+        rounded-full bg-amber-500/20 animate-ping">
+    </div>
+
+    <!-- Logo -->
+    <div class="relative z-10
+        w-60 h-60 sm:w-72 sm:h-72
+        rounded-full
+        bg-gradient-to-br
+        from-amber-500
+        to-orange-600
+        flex items-center justify-center
+        shadow-[0_0_80px_rgba(245,124,0,0.8)]">
+
+        <img
+            src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Project%201%20(20260725044513).png"
+            alt="Logo"
+            class="w-48 h-48 sm:w-56 sm:h-56 object-contain animate-pulse">
+
+    </div>
+
+    <!-- Judul -->
+    <h2 class="mt-10
+        text-4xl sm:text-5xl
+        font-bold
+        tracking-[0.35em]
+        text-amber-400
+        font-serif
+        text-center">
+        HALBIL IAAM 9
+    </h2>
+
+    <!-- Sub Judul -->
+    <p class="mt-3
+        text-sm
+        uppercase
+        tracking-[0.35em]
+        text-gray-400
+        text-center">
+        Memuat Undangan Digital...
+    </p>
+
+    <!-- Loading -->
+    <div class="mt-8 w-72 sm:w-96 h-2 bg-neutral-800 rounded-full overflow-hidden">
+        <div class="h-full w-3/4 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-400 rounded-full animate-pulse">
+        </div>
+    </div>
 
 </div>
 
-<h2 class="text-2xl font-bold tracking-widest text-amber-400 font-serif mb-2 text-center">
-  HALBIL IAAM 9
-</h2>
-    <p class="text-xs text-gray-400 tracking-widest uppercase mb-6 text-center">Memuat Undangan Digital...</p>
-    <div class="w-48 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
-      <div class="h-full bg-gradient-to-r from-amber-500 to-orange-500 animate-pulse w-3/4 rounded-full"></div>
-    </div>
-  </div>
-
-  <canvas id="lanternCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+<canvas id="lanternCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
   <!-- HTML5 Audio Sound Engine -->
   <audio id="bgMusic" loop preload="auto">
@@ -528,21 +565,10 @@
           <div class="w-12 h-0.5 bg-amber-500/30 mx-auto"></div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-3xl glass-card shadow-xl flex flex-col justify-between text-center">
-          <div>
-            <img src="./Img/Radit.jpg" alt="Ketua Panitia" class="w-24 h-24 rounded-full object-cover border-2 border-amber-400 mx-auto mb-4 shadow-md" />
-            <h3 class="text-lg font-serif font-bold text-white mb-1">M. Rodhitullah Jalil</h3>
-            <p class="text-xs text-amber-400 font-semibold mb-4">Ketua Panitia Halbil IAAM 9</p>
-            <p class="text-xs text-gray-300 italic leading-relaxed mb-6">"Selamat datang seluruh alumni dari penjuru negeri. Semoga silaturahmi Halbil 9 ini merekatkan sanubari dan menyalakan lentera pengabdian."</p>
-          </div>
-          <div class="w-12 h-0.5 bg-amber-500/30 mx-auto"></div>
-        </div>
-
         <div class="p-6 rounded-3xl glass-card shadow-xl flex flex-col justify-between text-center">
           <div>
             <img src="./Img/Faris.JPG" alt="Ketua IAAM" class="w-24 h-24 rounded-full object-cover border-2 border-amber-400 mx-auto mb-4 shadow-md" />
-            <h3 class="text-lg font-serif font-bold text-white mb-1">Salman Alfarisi, S.Pd.I.</h3>
+            <h3 class="text-lg font-serif font-bold text-white mb-1">Salman Alfarisi, S.Hum.</h3>
             <p class="text-xs text-amber-400 font-semibold mb-4">Ketua Umum IAAM</p>
             <p class="text-xs text-gray-300 italic leading-relaxed mb-6">"Alumni Al-Falahul Makkiyah Majidiyah adalah benteng moral dan ilmu. Mari perkuat sinergi alumni untuk menjadi terang penerang bangsa."</p>
           </div>
@@ -556,16 +582,6 @@
             <h3 class="text-lg font-serif font-bold text-white mb-1">M. Rodhitullah Jalil</h3>
             <p class="text-xs text-amber-400 font-semibold mb-4">Ketua Panitia Halbil IAAM 9</p>
             <p class="text-xs text-gray-300 italic leading-relaxed mb-6">"Selamat datang seluruh alumni dari penjuru negeri. Semoga silaturahmi Halbil 9 ini merekatkan sanubari dan menyalakan lentera pengabdian."</p>
-          </div>
-          <div class="w-12 h-0.5 bg-amber-500/30 mx-auto"></div>
-        </div>
-
-        <div class="p-6 rounded-3xl glass-card shadow-xl flex flex-col justify-between text-center">
-          <div>
-            <img src="./Img/Ra halim.JPG" alt="Pengasuh" class="w-24 h-24 rounded-full object-cover border-2 border-amber-400 mx-auto mb-4 shadow-md" />
-            <h3 class="text-lg font-serif font-bold text-white mb-1">K.H. Abdul Halim Majid, Lc,. M.A.</h3>
-            <p class="text-xs text-amber-400 font-semibold mb-4">Ketua Yayasan</p>
-            <p class="text-xs text-gray-300 italic leading-relaxed mb-6">"Restu dan doa senantiasa mengalir untuk anak-anakku alumni. Jadilah lentera yang tak pernah padam di mana pun kalian berpijak."</p>
           </div>
           <div class="w-12 h-0.5 bg-amber-500/30 mx-auto"></div>
         </div>
@@ -740,7 +756,7 @@
               referrerpolicy="strict-origin-when-cross-origin" 
               allowfullscreen></iframe>
           </div>
-          <h3 class="text-lg font-serif font-bold text-white mb-1">Sang Kiyai VIII</h3>
+          <h3 class="text-lg font-serif font-bold text-white mb-1">Sang Kiyai</h3>
           <p class="text-xs text-gray-400 leading-relaxed">Alunan kerinduan kepada sang Kiyai "KH. Abdul Majid Syu'ieb".</p>
         </div>
 
