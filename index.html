@@ -735,8 +735,7 @@
         </div>
       </div>
     </section>
-
-    <!-- Photo Gallery & Lightbox Section -->
+   <!-- Photo Gallery Section -->
 <section id="sec-gallery" class="py-16 px-4 sm:px-6 max-w-5xl mx-auto relative z-10">
   <div class="text-center mb-10">
     <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">Galeri Kenangan</span>
@@ -751,11 +750,11 @@
     <button onclick="filterGallery('Alumni', this)" class="filter-btn px-4 py-2 rounded-xl bg-neutral-900 border border-amber-500/30 text-gray-300 hover:text-white hover:border-amber-400 transition-all">Alumni</button>
   </div>
 
-  <!-- Gallery Grid (Berjejer 2 Kolom) -->
-  <div id="galleryGrid" class="grid grid-cols-2 gap-3 sm:gap-4">
+<!-- Gallery Grid (2 Kolom di Mobile, 3 Kolom di PC/Tablet) -->
+  <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
 
     <!-- ==================== KATEGORI: KIYAI (6 FOTO) ==================== -->
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Kiyai" onclick="openLightbox('https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid.png', 'Dokumentasi K.H. Abdul Majid Syu\'ieb - Foto 1')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Kiyai">
       <img src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid.png" alt="Sang Kiyai" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Sang Kiyai</span>
@@ -763,7 +762,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Kiyai" onclick="openLightbox('https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid1.png', 'Dokumentasi K.H. Abdul Majid Syu\'ieb - Foto 2')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Kiyai">
       <img src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid1.png" alt="Sang Kiyai" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Sang Kiyai</span>
@@ -771,7 +770,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Kiyai" onclick="openLightbox('https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid2.png', 'Dokumentasi K.H. Abdul Majid Syu\'ieb - Foto 3')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Kiyai">
       <img src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid2.png" alt="Sang Kiyai" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Sang Kiyai</span>
@@ -779,7 +778,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Kiyai" onclick="openLightbox('https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid5.png', 'Dokumentasi K.H. Abdul Majid Syu\'ieb - Foto 4')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Kiyai">
       <img src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid5.png" alt="Sang Kiyai" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Sang Kiyai</span>
@@ -787,7 +786,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Kiyai" onclick="openLightbox('https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid6.jpg', 'Dokumentasi K.H. Abdul Majid Syu\'ieb - Foto 5')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Kiyai">
       <img src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid6.jpg" alt="Sang Kiyai" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Sang Kiyai</span>
@@ -795,7 +794,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Kiyai" onclick="openLightbox('https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid7.jpg', 'Dokumentasi K.H. Abdul Majid Syu\'ieb - Foto 6')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Kiyai">
       <img src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Kiyai/Kh%20abd%20majid7.jpg" alt="Sang Kiyai" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Sang Kiyai</span>
@@ -804,7 +803,7 @@
     </div>
 
     <!-- ==================== KATEGORI: ACARA (6 FOTO) ==================== -->
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Acara" onclick="openLightbox('https://raw.githubusercontent.com/halbiliaam/Undangan/main/Acara/Bersama.jpg', 'Halbil IAAM VIII 2025 - Foto Bersama')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Acara">
       <img src="https://raw.githubusercontent.com/halbiliaam/Undangan/main/Acara/Bersama.jpg" alt="Acara" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Acara</span>
@@ -812,7 +811,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Acara" onclick="openLightbox('https://images.unsplash.com/photo-1519817650390-64a93db51149?w=800&auto=format&fit=crop&q=80', 'Lentera Malam Tirakatan - Acara 2')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Acara">
       <img src="https://images.unsplash.com/photo-1519817650390-64a93db51149?w=500&auto=format&fit=crop&q=80" alt="Acara" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Acara</span>
@@ -820,7 +819,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Acara" onclick="openLightbox('https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&auto=format&fit=crop&q=80', 'Pembukaan Majlis & Sambutan - Acara 3')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Acara">
       <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=500&auto=format&fit=crop&q=80" alt="Acara" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Acara</span>
@@ -828,7 +827,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Acara" onclick="openLightbox('https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=80', 'Doa Bersama & Istighosah - Acara 4')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Acara">
       <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=500&auto=format&fit=crop&q=80" alt="Acara" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Acara</span>
@@ -836,7 +835,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Acara" onclick="openLightbox('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&auto=format&fit=crop&q=80', 'Puncak Acara Silaturahmi - Acara 5')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Acara">
       <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500&auto=format&fit=crop&q=80" alt="Acara" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Acara</span>
@@ -844,7 +843,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Acara" onclick="openLightbox('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&auto=format&fit=crop&q=80', 'Penutupan dan Ramah Tamah - Acara 6')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Acara">
       <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=500&auto=format&fit=crop&q=80" alt="Acara" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Acara</span>
@@ -853,7 +852,7 @@
     </div>
 
     <!-- ==================== KATEGORI: ALUMNI (6 FOTO) ==================== -->
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Alumni" onclick="openLightbox('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80', 'Reuni Marhalah Lintas Angkatan - Alumni 1')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Alumni">
       <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&auto=format&fit=crop&q=80" alt="Alumni" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Alumni</span>
@@ -861,7 +860,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Alumni" onclick="openLightbox('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&auto=format&fit=crop&q=80', 'Temu Kangen Angkatan Sepuh - Alumni 2')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Alumni">
       <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&auto=format&fit=crop&q=80" alt="Alumni" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Alumni</span>
@@ -869,7 +868,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Alumni" onclick="openLightbox('https://images.unsplash.com/photo-1543269865-cbf427effbad?w=800&auto=format&fit=crop&q=80', 'Diskusi & Sharing Alumni - Alumni 3')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Alumni">
       <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=500&auto=format&fit=crop&q=80" alt="Alumni" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Alumni</span>
@@ -877,7 +876,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Alumni" onclick="openLightbox('https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800&auto=format&fit=crop&q=80', 'Keakraban Antar Generasi - Alumni 4')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Alumni">
       <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=500&auto=format&fit=crop&q=80" alt="Alumni" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Alumni</span>
@@ -885,7 +884,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Alumni" onclick="openLightbox('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=80', 'Musyawarah Pengurus IAAM - Alumni 5')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Alumni">
       <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&auto=format&fit=crop&q=80" alt="Alumni" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Alumni</span>
@@ -893,7 +892,7 @@
       </div>
     </div>
 
-    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Alumni" onclick="openLightbox('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&auto=format&fit=crop&q=80', 'Foto Bersama Pengurus & Alumni - Alumni 6')">
+    <div class="gallery-item group relative h-48 sm:h-64 rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 shadow-md" data-category="Alumni">
       <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=500&auto=format&fit=crop&q=80" alt="Alumni" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
         <span class="text-[10px] text-amber-400 uppercase font-bold">Alumni</span>
@@ -904,21 +903,8 @@
   </div>
 </section>
 
-<!-- Lightbox Modal Fullscreen -->
-<div id="lightboxModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden flex-col items-center justify-center p-4 transition-opacity duration-300 opacity-0" onclick="closeLightbox(event)">
-  <!-- Tombol Close -->
-  <button onclick="closeLightbox(event, true)" class="absolute top-5 right-5 text-amber-400 hover:text-white text-3xl font-bold p-2 z-10 transition-colors">&times;</button>
-  
-  <!-- Container Gambar & Deskripsi -->
-  <div class="max-w-4xl w-full flex flex-col items-center justify-center pointer-events-auto" onclick="event.stopPropagation()">
-    <img id="lightboxImg" src="" alt="Fullscreen View" class="max-h-[75vh] w-auto max-w-full rounded-xl object-contain border border-amber-500/30 shadow-2xl" />
-    <p id="lightboxCaption" class="mt-4 text-center text-sm sm:text-base text-gray-200 font-serif bg-neutral-900/80 border border-amber-500/20 px-6 py-2 rounded-xl"></p>
-  </div>
-</div>
-
-<!-- JavaScript Logic -->
+<!-- JavaScript Logic (Hanya untuk Filter Kategori) -->
 <script>
-  // Fungsi Filter Galeri
   function filterGallery(category, btnElement) {
     const items = document.querySelectorAll('.gallery-item');
     const buttons = document.querySelectorAll('.filter-btn');
@@ -938,87 +924,7 @@
       }
     });
   }
-
-  // Fungsi Buka Lightbox
-  function openLightbox(src, caption) {
-    const modal = document.getElementById('lightboxModal');
-    const img = document.getElementById('lightboxImg');
-    const cap = document.getElementById('lightboxCaption');
-
-    img.src = src;
-    cap.innerText = caption;
-
-    modal.classList.remove('hidden');
-    setTimeout(() => {
-      modal.classList.remove('opacity-0');
-    }, 10);
-    document.body.style.overflow = 'hidden'; // Kunci scroll layar utama
-  }
-
-  // Fungsi Tutup Lightbox
-  function closeLightbox(e, force = false) {
-    if (force || e.target.id === 'lightboxModal') {
-      const modal = document.getElementById('lightboxModal');
-      modal.classList.add('opacity-0');
-      setTimeout(() => {
-        modal.classList.add('hidden');
-        document.body.style.overflow = 'auto'; // Re-enable scroll
-      }, 300);
-    }
-  }
-
-  // Tutup dengan tombol Esc
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeLightbox(null, true);
-  });
 </script>
-
-    <!-- Video Documentation Section -->
-    <section id="sec-video" class="py-16 px-6 max-w-5xl mx-auto relative z-10">
-      <div class="text-center mb-12">
-        <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">Video Kiyai & Lembaga</span>
-        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mt-1">Seutas Cinta & Kerinduan</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="p-6 rounded-3xl glass-card shadow-xl flex flex-col">
-          <div class="relative w-full pb-[56.25%] rounded-2xl overflow-hidden mb-4 bg-black border border-amber-500/10">
-            <iframe
-      class="absolute top-0 left-0 w-full h-full"
-              src="https://www.youtube.com/embed/CQDakpz_efY?si=pwrDBniD2HgvYUG4" 
-              title="YouTube video player" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              referrerpolicy="strict-origin-when-cross-origin" 
-              allowfullscreen></iframe>
-          </div>
-          <h3 class="text-lg font-serif font-bold text-white mb-1">Sang Kiyai</h3>
-          <p class="text-xs text-gray-400 leading-relaxed">Alunan kerinduan kepada sang Kiyai "KH. Abdul Majid Syu'ieb".</p>
-        </div>
-
-        <div class="p-6 rounded-3xl glass-card shadow-xl flex flex-col">
-  <div class="relative w-full pb-[56.25%] rounded-2xl overflow-hidden mb-4 bg-black border border-amber-500/10">
-    <iframe
-      class="absolute top-0 left-0 w-full h-full"
-      src="https://www.youtube.com/embed/QC8TVrQWkM8?si=8_M2yzXQiiQ5lIAj"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen>
-    </iframe>
-  </div>
-
-  <h3 class="text-lg font-serif font-bold text-white mb-1">
-    Profil Yayasan Al-Majidiyah
-  </h3>
-
-  <p class="text-xs text-gray-400 leading-relaxed">
-    Sejarah perjalanan serta perkembangan sarana pendidikan LPI Al-Falahul Makkiyah Majidiyah.
-  </p>
-        </div>
-      </div>
-    </section>
 
     <!-- Donation & Infaq Section -->
     <section id="sec-donation" class="py-16 px-6 max-w-4xl mx-auto relative z-10">
